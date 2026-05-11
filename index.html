@@ -1603,9 +1603,8 @@ grond: ()=>`
 <section class="section" style="padding:0;border:none;margin:0;">
   <iframe
     src="grond.html"
-    style="width:100%;height:80vh;min-height:520px;border:none;border-radius:var(--r);
-           box-shadow:var(--shadow);display:block;"
-    title="Grondbibliotheek — De Wereld van de Goede Bijstand"
+    style="width:100%;height:calc(100vh - 52px);border:none;display:block;"
+    title="Grondbibliotheek"
     loading="lazy"
   ></iframe>
 </section>`,
@@ -1796,6 +1795,22 @@ function sidebarHTML() {
 
 /* ─── ROUTER ─── */
 function render(key) {
+  // Volledig scherm voor grond-pagina
+  const pageWrap = document.querySelector('.page-wrap');
+  const sidebar  = document.getElementById('sidebar');
+  const twoCol   = document.querySelector('.two-col');
+
+  if (key === 'grond') {
+    pageWrap.style.maxWidth  = '100%';
+    pageWrap.style.padding   = '0';
+    twoCol.style.display     = 'block';
+    sidebar.style.display    = 'none';
+  } else {
+    pageWrap.style.maxWidth  = '';
+    pageWrap.style.padding   = '';
+    twoCol.style.display     = '';
+    sidebar.style.display    = '';
+  }
   const fn = PAGES[key];
   const noticeKey = `gb_notice_${LANG}`;
   const noticeSeen = sessionStorage.getItem(noticeKey);
